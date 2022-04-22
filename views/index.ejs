@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ChatIgniter</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Hello to ChatIgniters</h1>
+    <ul><% rooms.forEach(room => {%>
+        <li> <%=room.name %>  <a href="/<%=room.id%>">join</a></li>
+      <%})%>
+
+    </ul>
+    <br>
+    <p>Or create your own:</p>
+    <form method="post" action="/">
+      <input type="text" placeholder="name" name="name" required>
+      <button type="submit">Create</button>
+    </form>
+  <%-quote.h%>
+  </body>
+</html>
