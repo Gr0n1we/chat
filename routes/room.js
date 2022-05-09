@@ -2,24 +2,12 @@ var express = require('express');
 var router = express.Router();
 var roomRepository = require('../repositories/room.repository');
 const axios = require("axios");
+const RoomController = require('../controllers/RoomController');
 
-router.get('/', (req, res) => {
-    axios.get('https://zenquotes.io/api/quotes/')
-        .then(result => {
-            const count = result.data.length;
-            const quote = result.data[Math.floor(Math.random()) * count];
+router.get('/', RoomController.findAll);
 
-            res.render('index', {rooms : roomRepository.getAll(), quote: quote});
-        })
-}).post('/', (req, res) => {
-    const name = req.body.name;
-    roomRepository.create(name);
+router.post('/', RoomController.create);
 
-    res.redirect('/');
-})
-
-router.get('/:id', (req, res) => {
-    res.send(`room by id = ${req.params.id}`)
-})
+router.get('/:id', RoomController.findById);
 
 module.exports = router;

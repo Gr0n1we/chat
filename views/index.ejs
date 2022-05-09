@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>ChatIgniter</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>Hello to ChatIgniters</h1>
-    <ul><% rooms.forEach(room => {%>
-        <li> <%=room.name %>  <a href="/<%=room.id%>">join</a></li>
-      <%})%>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+</head>
+<body>
+<h1>Hello to ChatIgniters</h1>
+<div class="list-group col-12">
+    <% rooms.forEach(room => { %>
+        <a href="/<%= room.id %>" class="list-group-item list-group-item-action"> <%= room.name %> </a>
+    <% }) %>
+</div>
+<br>
+<p>Or create your own:</p>
+<form class="row row-cols-lg-auto g-3 align-items-center" method="post" action="/">
+    <div class="col-12">
+        <input type="text" class="form-control" placeholder="name" name="name" required>
+    </div>
 
-    </ul>
-    <br>
-    <p>Or create your own:</p>
-    <form method="post" action="/">
-      <input type="text" placeholder="name" name="name" required>
-      <button type="submit">Create</button>
-    </form>
-  <%-quote.h%>
-  </body>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+</form>
+<%- quote.h %>
+</body>
 </html>
