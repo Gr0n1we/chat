@@ -9,12 +9,12 @@
 <h1>Hello to ChatIgniters</h1>
 <div class="list-group col-12">
     <% rooms.forEach(room => { %>
-        <a href="/<%= room.id %>" class="list-group-item list-group-item-action"> <%= room.name %> </a>
+        <a href="/rooms/<%= room.id %>" class="list-group-item list-group-item-action"> <%= room.name %> </a>
     <% }) %>
 </div>
 <br>
 <p>Or create your own:</p>
-<form class="row row-cols-lg-auto g-3 align-items-center" method="post" action="/">
+<form class="row row-cols-lg-auto g-3 align-items-center" method="post" action="/rooms">
     <div class="col-12">
         <input type="text" class="form-control" placeholder="name" name="name" required>
     </div>

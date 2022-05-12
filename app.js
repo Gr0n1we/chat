@@ -36,10 +36,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use('/message', messagesRouter);
 
 app.get("/", RoomController.findAll);
-app.post("/", RoomController.create);
+app.post("/rooms", RoomController.create);
 
-app.get("/:id", MessageController.findAll);
-app.post("/:id", MessageController.create);
+app.get("/rooms/:id", MessageController.findAll);
+app.post("/rooms/:id/messages", MessageController.create);
 
 
 app.use(function(req, res, next) {
