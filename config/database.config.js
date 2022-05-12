@@ -1,3 +1,3 @@
 module.exports = {
-    url: "mongodb://localhost:27017/chat"
+    url: "mongodb+srv://igor:<password>@cluster0.qampv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 }
