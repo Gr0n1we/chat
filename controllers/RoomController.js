@@ -34,3 +34,25 @@ exports.findById = async (req, res) => {
         res.status(404).json({message: e.message});
     }
 }
+
+exports.delete = async (req, res) => {
+    try {
+        const id = req.params.id;
+        await RoomModel.findOneAndRemove({id: id});
+        res.send("success")
+    } catch (e ) {
+        res.status(500).json({message : e.message});
+    }
+}
+
+exports.update = async (req, res) => {
+    try {
+        const update = { name: req.body.name };
+        const id = req.params.id;
+        const room = await RoomModel.findOneAndUpdate({id: id}, update);
+
+        res.send("success");
+    } catch (e ) {
+        res.status(500).json({message : e.message});
+    }
+}

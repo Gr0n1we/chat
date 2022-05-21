@@ -41,6 +41,12 @@ app.post("/rooms", RoomController.create);
 app.get("/rooms/:id", MessageController.findAll);
 app.post("/rooms/:id/messages", MessageController.create);
 
+app.delete('/rooms/:id', RoomController.delete);
+app.patch('/rooms/:id', RoomController.update);
+
+app.delete('/messages/:id', MessageController.delete);
+app.patch('/messages/:id', MessageController.update);
+
 
 app.use(function(req, res, next) {
   next(createError(404));
