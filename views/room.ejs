@@ -14,7 +14,7 @@
         <li><%=message.text %></li>
         <%})%>
     </ul>
-    <form class="row row-cols-lg-auto g-3 align-items-center" method="post" action="/rooms/<%=room._id%>/messages">
+    <form class="row row-cols-lg-auto g-3 align-items-center" method="post" action="/rooms/<%=room._id%>/">
         <div class="col-12">
             <input type="text" class="form-control" placeholder="text" name="text" required>
         </div>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ChatIgniter</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+</head>
+<body>
+<h1>Hello to ChatIgniters</h1>
+
+
+<% if (!auth) {%>
+    <p>Our community is very closed, please verify your identity.</p>
+ <a href="/auth/google">Sign in with google!</a>
+<%} else {%>
+<%-body -%>
+<form method="post" action="/auth/logout">
+    <button class="btn btn-danger">Logout</button>
+</form>
+<%}%>
+</body>
+</html>

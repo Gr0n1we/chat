@@ -3,15 +3,14 @@ var router = express.Router();
 //var roomRepository = require('../repositories/room.repository');
 const axios = require("axios");
 const RoomController = require('../controllers/RoomController');
+const MessageController = require('../controllers/MessageController');
+const AuthMiddleware = require('../middlewares/AuthMiddleware');
 
-router.get('/', RoomController.findAll);
-
-router.post('/rooms', RoomController.create);
-
-router.get('/rooms/:id', RoomController.findById);
-
-router.delete('/rooms/:id', RoomController.delete);
-
-router.patch('/rooms/:id', RoomController.update);
+router.get('/', [AuthMiddleware], RoomController.findAll);
+router.post('/', RoomController.create);
+router.get('/:id', MessageController.findAll);
+router.post('/:id', MessageController.create);
+router.delete('/:id', RoomController.delete);
+router.patch('/:id', RoomController.update);
 
 module.exports = router;

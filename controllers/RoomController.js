@@ -19,7 +19,7 @@ exports.findAll = async (req, res) => {
                 const count = result.data.length;
                 const quote = result.data[Math.floor(Math.random()) * count];
 
-                res.render('index', {rooms: room, quote: quote});
+                res.render('index', {rooms: room, quote: quote, auth: req.isAuthenticated()});
             });
     } catch (e) {
         res.status(404).json({message: e.message});

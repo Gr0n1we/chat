@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>ChatIgniter</title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-</head>
-<body>
-<h1>Hello to ChatIgniters</h1>
+<% layout('layout') -%>
 <div class="list-group col-12">
     <% rooms.forEach(room => { %>
         <a href="/rooms/<%= room.id %>" class="list-group-item list-group-item-action"> <%= room.name %> </a>
@@ -23,6 +15,5 @@
         <button type="submit" class="btn btn-primary">Create</button>
     </div>
 </form>
+
 <%- quote.h %>
-</body>
-</html>

@@ -1,10 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var MessageController = require('../controllers/MessageController');
 
-router.route('/:id').get((req, res) => {
-    res.send('get message from room by id');
-}).post((req, res) => {
-    res.send('send message to room by id');
-});
+router.delete('/:id', MessageController.delete);
+router.patch('/:id', MessageController.update);
 
 module.exports = router;
