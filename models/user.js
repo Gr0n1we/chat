@@ -36,7 +36,7 @@ passport.deserializeUser(function (id, done) {
 passport.use(new GoogleStrategy({
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: "https://chat-webka.herokuapp.com/auth/google/osekter"
+        callbackURL: "http://localhost:3000/auth/google/osekter"
     },
     function(accessToken, refreshToken, profile, cb) {
         user.findOrCreate({ googleId: profile.id }, function (err, user) {
