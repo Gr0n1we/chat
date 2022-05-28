@@ -6,16 +6,15 @@ const passport = require("passport");
 router.post('/login', AuthController.verify);
 router.post('/register', AuthController.create);
 
-router.get("/google", passport.authenticate('google', {scope: ["profile"]}), (req, res) => {
-    console.log("123123123");
-});
-
 router.get('/google/osekter',
-    passport.authenticate('google', {failureRedirect: '/login'}),
+    passport.authenticate('google', {failureRedirect: '/'}),
     function (req, res) {
         // Successful authentication, redirect home.
         res.redirect('/');
     });
+router.get("/google", passport.authenticate('google', {scope: ["profile"]}), (req, res) => {
+    console.log("123123123");
+});
 
 router.post('/logout', function(req, res, next) {
     req.logout(function(err) {
