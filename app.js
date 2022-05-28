@@ -6,13 +6,13 @@ var logger = require('morgan');
 var dbConfig = require('./config/database.config');
 var mongoose = require('mongoose');
 const RoomController = require('./controllers/RoomController');
-const MessageController = require('./controllers/MessageController');
 var session = require('express-session');
 const AuthMiddleware = require('./middlewares/AuthMiddleware');
 
 var roomsRouter = require('./routes/room');
 var messagesRouter = require('./routes/message');
 var authRouter = require('./routes/auth');
+var apiRouter = require('./routes/api');
 const passport = require("passport");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 var app = express();
@@ -38,16 +38,20 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-    secret: process.env.SECRET,
+    secret: "123123123",
     resave: false,
     saveUninitialized: false
 }))
 
 app.use(passport.initialize());
 app.use(passport.session());
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/auth', authRouter);
 app.get("/", RoomController.findAll);
 app.use(AuthMiddleware);
+app.use('/api', apiRouter);
 app.use('/rooms', roomsRouter);
 app.use('/messages', messagesRouter);
 

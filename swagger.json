@@ -1,0 +1,356 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Chat api documentation",
+    "version": "1.0.0",
+    "title": "Chat api"
+  },
+  "host": "https://chat-webka.herokuapp.com/api",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Rooms",
+      "description": "Room crud"
+    },
+    {
+      "name": "Messages",
+      "description": "Messages crud"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/rooms": {
+      "post": {
+        "tags": [
+          "Rooms"
+        ],
+        "summary": "Create new room",
+        "operationId": "addRoom",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Room model",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoomCreate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Rooms"
+        ],
+        "summary": "Get all rooms",
+        "operationId": "getRooms",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Room"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rooms/{id}": {
+      "delete": {
+        "tags": [
+          "Rooms"
+        ],
+        "summary": "Delete room by id",
+        "operationId": "deleteRoom",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of room to delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "404": {
+            "description": "Room not found"
+          },
+          "500": {
+            "description": "Room not deleted, database error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Rooms"
+        ],
+        "summary": "Update room by ud",
+        "operationId": "updateRoom",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of room to delete",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoomUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "404": {
+            "description": "Room not found"
+          },
+          "500": {
+            "description": "Room not updated, database error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Messages"
+        ],
+        "summary": "Get room's messages",
+        "operationId": "getMessages",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of room to get messages",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Message"
+              }
+            }
+          },
+          "404": {
+            "description": "Room not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Messages"
+        ],
+        "summary": "Create message in room",
+        "operationId": "addMessage",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of room to get messages",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MessageCreate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "404": {
+            "description": "Room not found"
+          },
+          "500": {
+            "description": "Message not created, database error"
+          }
+        }
+      }
+    },
+    "/messages/{id}": {
+      "delete": {
+        "tags": [
+          "Messages"
+        ],
+        "summary": "Delete Message by id",
+        "operationId": "deleteMessage",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of message to delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "404": {
+            "description": "Message not found"
+          },
+          "500": {
+            "description": "Message not deleted, database error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Messages"
+        ],
+        "summary": "Update message by ud",
+        "operationId": "updateMessage",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of room to delete",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MessageUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          },
+          "404": {
+            "description": "Message not found"
+          },
+          "500": {
+            "description": "Message not updated, database error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Room": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": "id of room"
+        },
+        "name": {
+          "type": "string",
+          "description": "name of room [unique]"
+        }
+      }
+    },
+    "Message": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": "id of message"
+        },
+        "text": {
+          "type": "string",
+          "description": "content of message"
+        }
+      }
+    },
+    "RoomCreate": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of room [unique]"
+        }
+      }
+    },
+    "RoomUpdate": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of room [unique]"
+        }
+      }
+    },
+    "MessageCreate": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "content of message"
+        }
+      }
+    },
+    "MessageUpdate": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "content of message"
+        }
+      }
+    }
+  }
+}
