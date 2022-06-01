@@ -1,26 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>ChatIgniter</title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-</head>
-<body>
-    <h1>Room: <%= room.name %></h1>
-    <a class="btn btn-info" href="/">Back</a>
-    <h2>Messages:</h2>
-    <ul>
-        <% messages.forEach(message => { %>
-        <li><%=message.text %></li>
-        <%})%>
-    </ul>
-    <form class="row row-cols-lg-auto g-3 align-items-center" method="post" action="/rooms/<%=room._id%>/">
-        <div class="col-12">
-            <input type="text" class="form-control" placeholder="text" name="text" required>
-        </div>
+<% layout('layout') -%>
+<h3>Room: <%= room.name %></h3>
+<a class="btn btn-secondary" href="/">Back</a>
+<br/>
+<h3>Messages:</h3>
+<div class="list-group col-12">
+    <% messages.forEach(message => { %>
+        <a href="#" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"><%= message.text %></h5>
+            </div>
+            By <small><small class="text-info"><%= message.authorUsername %></small></small>
+        </a>
+    <% }) %>
+</div>
+<br/>
+<form class="row row-cols-lg-auto g-3 align-items-center" method="post" action="/rooms/<%= room._id %>/">
+    <div class="col-12">
+        <input type="text" class="form-control" placeholder="text" name="text" required>
+    </div>
 
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary">Send</button>
-        </div>
-    </form>
-</body>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Send</button>
+    </div>
+</form>

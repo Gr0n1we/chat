@@ -9,6 +9,10 @@ var schema = new Schema({
     room: {
         type: Schema.Types.ObjectId,
         ref: "Room"
+    },
+    authorUsername: {
+        type: String,
+        default: "anon"
     }
 });
 

@@ -2,13 +2,18 @@ const RoomModel = require('../models/room');
 const axios = require("axios");
 
 exports.create = async (req, res) => {
-    const room = new RoomModel({
-        name: req.body.name
-    });
+    try {
+        const room = new RoomModel({
+            name: req.body.name,
+            authorUsername: req.user.username
+        });
 
-    await room.save().then(data => {
+        await room.save().then(data => {
+            res.redirect('/');
+        })
+    } catch (e) {
         res.redirect('/');
-    })
+    }
 }
 
 exports.findAll = async (req, res) => {
@@ -19,7 +24,7 @@ exports.findAll = async (req, res) => {
                 const count = result.data.length;
                 const quote = result.data[Math.floor(Math.random()) * count];
 
-                res.render('index', {rooms: room, quote: quote, auth: req.isAuthenticated()});
+                res.render('index', {rooms: room, quote: quote, auth: req.isLogged, user: req.user});
             });
     } catch (e) {
         res.status(404).json({message: e.message});
@@ -41,20 +46,20 @@ exports.delete = async (req, res) => {
         const id = req.params.id;
         await RoomModel.findOneAndRemove({id: id});
         res.send("success")
-    } catch (e ) {
-        res.status(500).json({message : e.message});
+    } catch (e) {
+        res.status(500).json({message: e.message});
     }
 }
 
 exports.update = async (req, res) => {
     try {
-        const update = { name: req.body.name };
+        const update = {name: req.body.name};
         const id = req.params.id;
         const room = await RoomModel.findOneAndUpdate({id: id}, update);
 
         res.send("success");
-    } catch (e ) {
-        res.status(500).json({message : e.message});
+    } catch (e) {
+        res.status(500).json({message: e.message});
     }
 }
 
@@ -75,7 +80,7 @@ exports.deleteApi = async (req, res) => {
         if (!room)
             return res.status(400).json({message: "not found"});
 
-        return res.status(200).json({message : "success"});
+        return res.status(200).json({message: "success"});
     } catch (e) {
         res.status(500).json({message: e.message});
     }
@@ -97,7 +102,7 @@ exports.createApi = async (req, res) => {
 
 exports.updateApi = async (req, res) => {
     try {
-        const update = { name: req.body.name };
+        const update = {name: req.body.name};
         const id = req.params.id;
         const room = await RoomModel.findByIdAndUpdate(id, update);
         if (!room)

@@ -10,7 +10,11 @@ var schema = new mongoose.Schema({
     messages: [{
         type: Schema.Types.ObjectId,
         ref: "Message"
-    }]
+    }],
+    authorUsername: {
+        type: String,
+        default: "anon"
+    }
 })
 
 var room = new mongoose.model("Room", schema);

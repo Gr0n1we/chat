@@ -1,12 +1,11 @@
 function auth (req, res, next)  {
     if (req.isAuthenticated()) {
-        console.log("MIDDLEWARE");
         req.isLogged = true;
         return next();
     }
 
-
-    return res.redirect('/');
+    req.isLogged = false;
+    return res.redirect('/auth/login');
 }
 
 module.exports = auth;

@@ -6,17 +6,26 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
 </head>
 <body>
-<h1>Hello to ChatIgniters</h1>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Hello to ChatIgniters</h1>
+        </div>
+        <div class="col text-end">
+            <% if (auth) { %>
+                <form method="post" action="/auth/logout">
+                    <button class="btn btn-danger ">Logout</button>
+                </form>
+            <%}%>
+        </div>
+    </div>
 
-
-<% if (!auth) {%>
-    <p>Our community is very closed, please verify your identity.</p>
- <a href="/auth/google">Sign in with google!</a>
-<%} else {%>
-<%-body -%>
-<form method="post" action="/auth/logout">
-    <button class="btn btn-danger">Logout</button>
-</form>
-<%}%>
+    <% if (!auth) { %>
+        <p>Our community is very closed, please verify your identity.</p>
+        <a class="link-info" href="/auth/login">Sign in</a>
+    <% } else { %>
+    <%- body -%>
+    <% } %>
+</div>
 </body>
 </html>

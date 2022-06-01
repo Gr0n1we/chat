@@ -5,8 +5,8 @@
     "version": "1.0.0",
     "title": "Chat api"
   },
-  "host": "https://chat-webka.herokuapp.com/api",
-  "basePath": "/",
+  "host": "localhost:3000",
+  "basePath": "/api",
   "tags": [
     {
       "name": "Rooms",

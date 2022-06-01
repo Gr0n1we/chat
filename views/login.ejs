@@ -1,0 +1,18 @@
+<% layout('layoutAnon') -%>
+<h2>Login</h2>
+<form method="post" action="/auth/login">
+    <%if (messages.error) {%>
+    <%= messages.error %>
+    <%}%>
+
+    <div class="mb-3">
+        <label class="form-label" for="email">Email address</label>
+        <input class="form-control" type="email" name="email" id="email" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="password">Password</label>
+        <input class="form-control" type="password" name="password" id="password" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="/auth/register" class="link-info">Or sign up</a>
+</form>

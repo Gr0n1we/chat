@@ -5,14 +5,11 @@ exports.create = async (req, res) => {
     const room = RoomModel.find({_id: req.params.id})[0];
     const message = new MessageModel({
         text: req.body.text,
-        room: req.params.id
+        room: req.params.id,
+        authorUsername: req.user.username
     });
 
-    console.log(message);
     await message.save();
-
-    //room.messages.push(message.id);
-    await room.save();
 
     res.redirect('back');
 }
@@ -21,11 +18,7 @@ exports.findAll = async (req, res) => {
     const room = await RoomModel.find({_id: req.params.id}).populate("messages");
     const messages = await MessageModel.find({room: req.params.id});
 
-    console.log(typeof (room[0]));
-    console.log(room[0]);
-    //console.log(room[0].name);
-
-    res.render('room', {room: room[0], messages: messages});
+    res.render('room', {room: room[0], messages: messages, auth: req.isLogged});
 }
 
 exports.delete = async (req, res) => {
@@ -105,7 +98,6 @@ exports.findAllApi = async (req, res) => {
             return res.status(404).json({message: "not found"});
 
         const messages = await MessageModel.find({room: id});
-        console.log(messages);
 
         res.status(200).json(messages);
     } catch (e) {
